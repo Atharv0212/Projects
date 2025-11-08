@@ -1,0 +1,19 @@
+.main{
+    background-color: gray;
+    
+    width: 40%;
+    margin-left: 28%;
+    border-radius: 20px;
+    text-align: center;
+}
+h1{
+    align-self: center;
+}
+.balance{
+    background-color: beige;
+    border-radius: 15px;
+}
+.capture{
+    background-color: wheat;
+    border-radius: 15px;
+}
