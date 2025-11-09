@@ -75,14 +75,25 @@ function fetchPokemon() {
             resultText += `The opponent ${challengePokemon.name}'s ${stat_names[Stat_challenge]} is ${challengeStat}.<br><br>`;
 
             if (userStat > challengeStat) {
-                resultText += `<span style="color:green;">You win!</span>`;
-                coins += 100;
+               if(pokelist.includes(data.name)){
+                resultText += `<span style="color:green;">You win! Pokecoins increased by 100</span>`;
+                coins += 100;}
+                else{
+                   resultText += `<span style="color:yellow;">You win!, but used an uncaptured Pokemon, deducted 20 pokecoins.</span>`;
+                   coins -= 20;
+                }
                 pokelist.push(challengePokemon.name)
             } else if (userStat < challengeStat) {
-                resultText += `<span style="color:red;">You lose!</span>`;
+                resultText += `<span style="color:red;">You lose! 50 pokecoins deducted</span>`;
                 coins -= 50;
             } else {
+              if(pokelist.includes(data.name)){
                 resultText += `<span style="color:blue;">It's a draw!</span>`;
+                coins += 0;}
+                else{
+                   resultText += `<span style="color:yellow;">Draw!, but used an uncaptured Pokemon, deducted 10 pokecoins.</span>`;
+                   coins -= 10;
+                }
             }
 
             Pokecoins.textContent = coins;
