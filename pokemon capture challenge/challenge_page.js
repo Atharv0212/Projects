@@ -9,7 +9,7 @@ const stat_names = ["HP", "Attack", "Defense", "Special-Attack", "Special-Defens
 let coins = 1000;
 let randint = 0;
 let challengePokemon;
-let challengeStatIndex;
+let Stat_challenge;
 Pokecoins.textContent = coins;
 
 function getRandomInt(min, max) {
@@ -28,11 +28,11 @@ function getRandomInt(min, max) {
         })
         .then(data => {
             challengePokemon = data;
-            challengeStatIndex = getRandomInt(0, 5);
+            Stat_challenge = getRandomInt(0, 5);
             
             poke_name.textContent = challengePokemon.name;
-            type_of_stat.textContent = stat_names[challengeStatIndex];
-            stat_number.textContent = challengePokemon.stats[challengeStatIndex].base_stat;
+            type_of_stat.textContent = stat_names[Stat_challenge];
+            stat_number.textContent = challengePokemon.stats[Stat_challenge].base_stat;
             resultDiv.innerHTML = '';
             pokemonInput.value = '';
             document.getElementById('Challenge_Pokemon_card').innerHTML = `
@@ -66,8 +66,8 @@ function fetchPokemon() {
             return response.json();
         })
         .then(data => {
-            const userStat = data.stats[challengeStatIndex].base_stat;
-            const challengeStat = challengePokemon.stats[challengeStatIndex].base_stat;
+            const userStat = data.stats[Stat_challenge].base_stat;
+            const challengeStat = challengePokemon.stats[Stat_challenge].base_stat;
             document.getElementById('Your_Pokemon_card').innerHTML = `
             <h2>${name}</h2>
             <img src="${data.sprites.front_default}" alt="${name}">
@@ -75,8 +75,8 @@ function fetchPokemon() {
             <p>Weight: ${data.weight}</p>
           `;
             
-            let resultText = `Your ${data.name}'s ${stat_names[challengeStatIndex]} is ${userStat}.<br>`;
-            resultText += `The opponent ${challengePokemon.name}'s ${stat_names[challengeStatIndex]} is ${challengeStat}.<br><br>`;
+            let resultText = `Your ${data.name}'s ${stat_names[Stat_challenge]} is ${userStat}.<br>`;
+            resultText += `The opponent ${challengePokemon.name}'s ${stat_names[Stat_challenge]} is ${challengeStat}.<br><br>`;
 
             if (userStat > challengeStat) {
                 resultText += `<span style="color:green;">You win!</span>`;
@@ -92,6 +92,7 @@ function fetchPokemon() {
             resultDiv.innerHTML = resultText;
             
             setTimeout(newPokeChallenge, 3000);
+            
         })
         .catch(error => {
             resultDiv.innerHTML = `<span style="color:red;">${error.message}</span>`;
