@@ -17,63 +17,75 @@ function getRandomInt(min, max) {
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
-function new_poke_chalenge(){
-   if(set === true){
-    const poke = getRandomInt(1, 898);
-    const url = `https://pokeapi.co/api/v2/pokemon/${poke}`;
-      
+  function newPokeChallenge() {
+    const randomPokemonId = getRandomInt(1, 898);
+    const url = `https://pokeapi.co/api/v2/pokemon/${randomPokemonId}`;
+
     fetch(url)
         .then(response => {
-          if (!response.ok) throw new Error('Pokémon not found');
-          return response.json();
+            if (!response.ok) throw new Error('Challenge Pokémon not found');
+            return response.json();
         })
-    
         .then(data => {
-            const statsArrayOfObjects = data.stats;
-            let fname = url.name
-            document.getElementById('Pokemon_name').innerHTML = `
-            <p>${fname}</p>
-        `;
-            const statsArray = statsArrayOfObjects.map(statObject => statObject.base_stat);
-            document.getElementById('sts').innerHTML = `
-            <p>${statsArray[stat]}</p>
-        `;
+            challengePokemon = data;
+            challengeStatIndex = getRandomInt(0, 5);
+            
+            poke_name.textContent = challengePokemon.name;
+            type_of_stat.textContent = stat_names[challengeStatIndex];
+            stat_number.textContent = challengePokemon.stats[challengeStatIndex].base_stat;
+            resultDiv.innerHTML = '';
+            pokemonInput.value = '';
         })
         .catch(error => {
-          document.getElementById('result').innerHTML = `<span style="color:red;">${error.message}</span>`;
-        });} 
+            resultDiv.innerHTML = `<span style="color:red;">${error.message}</span>`;
+        });
 }
-
 function fetchPokemon() {
-    if(set === true){
-    const name = document.getElementById('pokemon-input').value.trim().toLowerCase();
+    const name = pokemonInput.value.trim().toLowerCase();
+    if (!name) {
+        resultDiv.innerHTML = `<span style="color:red;">Please enter a Pokémon name.</span>`;
+        return;
+    }
+
+    if (!challengePokemon) {
+        resultDiv.innerHTML = `<span style="color:red;">Looking for Pokemon.</span>`;
+        return;
+    }
+
     const url = `https://pokeapi.co/api/v2/pokemon/${name}`;
-      
+  
     fetch(url)
         .then(response => {
-          if (!response.ok) throw new Error('Pokémon not found');
-          return response.json();
+            if (!response.ok) throw new Error('No such Pokémon not found');
+            return response.json();
         })
-    
         .then(data => {
-            const statsArrayOfObjects = data.stats;
-            const statsArray = statsArrayOfObjects.map(statObject => statObject.base_stat);
-            document.getElementById('result').innerHTML = `
-            <h2>${data.name} Stats</h2>
-            <p>${statsArray.join(', ')}</p>
-        `;
+            const userStat = data.stats[challengeStatIndex].base_stat;
+            const challengeStat = challengePokemon.stats[challengeStatIndex].base_stat;
+            
+            let resultText = `Your ${data.name}'s ${stat_names[challengeStatIndex]} is ${userStat}.<br>`;
+            resultText += `The opponent ${challengePokemon.name}'s ${stat_names[challengeStatIndex]} is ${challengeStat}.<br><br>`;
+
+            if (userStat > challengeStat) {
+                resultText += `<span style="color:green;">You win!</span>`;
+                coins += 100;
+            } else if (userStat < challengeStat) {
+                resultText += `<span style="color:red;">You lose!</span>`;
+                coins -= 50;
+            } else {
+                resultText += `<span style="color:blue;">It's a draw!</span>`;
+            }
+
+            Pokecoins.textContent = coins;
+            resultDiv.innerHTML = resultText;
+            
+            setTimeout(newPokeChallenge, 3000);
         })
         .catch(error => {
-          document.getElementById('result').innerHTML = `<span style="color:red;">${error.message}</span>`;
-        });}
+            resultDiv.innerHTML = `<span style="color:red;">${error.message}</span>`;
+        });
 }
 
-for(let i =0; i<3; i++){
-    set = true
-    setTimeout(getRandomInt(0, 5), 2000)
-    new_poke_chalenge()
-    let stat = getRandomInt(0,6)
-    let poke = getRandomInt(0,898)
-}
+newPokeChallenge();
     
 
