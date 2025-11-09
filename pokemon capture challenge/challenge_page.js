@@ -35,6 +35,12 @@ function getRandomInt(min, max) {
             stat_number.textContent = challengePokemon.stats[challengeStatIndex].base_stat;
             resultDiv.innerHTML = '';
             pokemonInput.value = '';
+            document.getElementById('Challenge_Pokemon_card').innerHTML = `
+            <h2>${data.name}</h2>
+            <img src="${data.sprites.front_default}" alt="${data.name}">
+            <p>Height: ${data.height}</p>
+            <p>Weight: ${data.weight}</p>
+          `;
         })
         .catch(error => {
             resultDiv.innerHTML = `<span style="color:red;">${error.message}</span>`;
@@ -62,6 +68,12 @@ function fetchPokemon() {
         .then(data => {
             const userStat = data.stats[challengeStatIndex].base_stat;
             const challengeStat = challengePokemon.stats[challengeStatIndex].base_stat;
+            document.getElementById('Your_Pokemon_card').innerHTML = `
+            <h2>${name}</h2>
+            <img src="${data.sprites.front_default}" alt="${name}">
+            <p>Height: ${data.height}</p>
+            <p>Weight: ${data.weight}</p>
+          `;
             
             let resultText = `Your ${data.name}'s ${stat_names[challengeStatIndex]} is ${userStat}.<br>`;
             resultText += `The opponent ${challengePokemon.name}'s ${stat_names[challengeStatIndex]} is ${challengeStat}.<br><br>`;
