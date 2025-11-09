@@ -4,7 +4,9 @@ const type_of_stat = document.getElementById('type_of_stat');
 const stat_number = document.getElementById('sts');
 const resultDiv = document.getElementById('result');
 const pokemonInput = document.getElementById('pokemon-input');
+const poke_list = document.getElementById('poke_list')
 
+let pokelist = [];
 const stat_names = ["HP", "Attack", "Defense", "Special-Attack", "Special-Defense", "Speed"];
 let coins = 1000;
 let randint = 0;
@@ -36,11 +38,9 @@ function getRandomInt(min, max) {
             resultDiv.innerHTML = '';
             pokemonInput.value = '';
             document.getElementById('Challenge_Pokemon_card').innerHTML = `
-            <h2>${data.name}</h2>
+            <h2>${data.name} appeared!</h2>
             <img src="${data.sprites.front_default}" alt="${data.name}">
-            <p>Height: ${data.height}</p>
-            <p>Weight: ${data.weight}</p>
-          `;
+           `;
         })
         .catch(error => {
             resultDiv.innerHTML = `<span style="color:red;">${error.message}</span>`;
@@ -68,12 +68,8 @@ function fetchPokemon() {
         .then(data => {
             const userStat = data.stats[Stat_challenge].base_stat;
             const challengeStat = challengePokemon.stats[Stat_challenge].base_stat;
-            document.getElementById('Your_Pokemon_card').innerHTML = `
-            <h2>${name}</h2>
-            <img src="${data.sprites.front_default}" alt="${name}">
-            <p>Height: ${data.height}</p>
-            <p>Weight: ${data.weight}</p>
-          `;
+            
+          
             
             let resultText = `Your ${data.name}'s ${stat_names[Stat_challenge]} is ${userStat}.<br>`;
             resultText += `The opponent ${challengePokemon.name}'s ${stat_names[Stat_challenge]} is ${challengeStat}.<br><br>`;
@@ -81,6 +77,7 @@ function fetchPokemon() {
             if (userStat > challengeStat) {
                 resultText += `<span style="color:green;">You win!</span>`;
                 coins += 100;
+                pokelist.push(challengePokemon.name)
             } else if (userStat < challengeStat) {
                 resultText += `<span style="color:red;">You lose!</span>`;
                 coins -= 50;
@@ -97,6 +94,19 @@ function fetchPokemon() {
         .catch(error => {
             resultDiv.innerHTML = `<span style="color:red;">${error.message}</span>`;
         });
+}
+
+function showpokelist(){
+  poke_list.innerHTML = ``
+  for (const pokem of pokelist){
+      
+      poke_list.innerHTML += `<span style="color:red;">${pokem}</span><br>`;
+    }
+  poke_list.innerHTML += `<button onclick='hide_list()'>Back</button>`
+}
+
+function hide_list(){
+  poke_list.innerHTML = `<button onclick='showpokelist()'>Show captured Pokemon</button>`
 }
 
 newPokeChallenge();

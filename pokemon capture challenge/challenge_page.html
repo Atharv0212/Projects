@@ -14,23 +14,23 @@
         <div class="balance">Balance: <b><span style="color: green; size: 50px;" id="coins">1000</span></b> P </div>
         <div class="capture">
             <h2>Capture Challenge</h2>
-            Pokémon to Out-Stat<br>
-            <span id="Pokemon_name">content</span>
-            <div>
-                Target Base Stat <span id="type_of_stat">SPECIAL-ATTACK</span><br>
-                <span id="sts">0</span>
-            </div>
+            <div class="Pokestat">Pokémon to Out-Stat<br>
+            <span style="font-size: 25px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: orange;" id="Pokemon_name">content</span>
+            <div style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
+                Target Base Stat: <b><span id="type_of_stat" style="color: blueviolet;">SPECIAL-ATTACK</span></b><br>
+                <b><span style="font-size: 26px;" id="sts">0</span></b>
+            </div></div>
         </div>
         <div>
-            <input type="text" id="pokemon-input" placeholder="Enter Pokémon name" /><br>
-            <button onclick="fetchPokemon()">Check Power</button>
+            <input class="input" type="text" id="pokemon-input" placeholder="Enter Pokémon name" /><br>
+            <button class="checkpowerbtn" onclick="fetchPokemon()">Check Power</button>
             <div id="result"></div>
         </div>
     </div>
     <div class="main">
         <h1>Pokémon Card</h1>
         <div id="Challenge_Pokemon_card"></div>
-        <div id="Your_Pokemon_card"></div>
+        <div id="poke_list"><button onclick="showpokelist()">Show captured pokemon</button></div>
     </div>
     </div>
     <script src="challenge_page.js"></script>
