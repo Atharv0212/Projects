@@ -31,3 +31,10 @@ h3{
     border-color: aqua;
     margin-bottom: 10px;
 }
+.para{
+    width: 80%;
+    background-color: bisque;
+    margin-left: 40px;
+    padding: 6px;
+    border-radius: 10px;
+}

@@ -127,9 +127,9 @@ function poke_stat(singlepokestat){
             <img src="${data.sprites.front_default}" alt="${data.name}"><br>
            `;
            data.stats.forEach(stat => {
-                poke_list.innerHTML += `${stat.stat.name}: ${stat.base_stat}<br>`;
+                poke_list.innerHTML += `<span style="color: blueviolet">${stat.stat.name}</span>: <b>${stat.base_stat}</b><br>`;
             });
-            poke_list.innerHTML += `<br><button onclick="showpokelist()">Back to List</button>`;
+            poke_list.innerHTML += `<br><button class="pokelistshow" onclick="showpokelist()">Show captured Pokemons</button><br><br>`;
         })
         .catch(error => {
             resultDiv.innerHTML = `<span style="color:red;">${error.message}</span>`;
@@ -141,7 +141,7 @@ function showpokelist(){
   poke_list.innerHTML = ``
   for (const pokem of pokelist){
       
-      poke_list.innerHTML += `<button onclick="poke_stat('${pokem}')" class="pokelistitem">${pokem}</button><br><br>`;
+      poke_list.innerHTML += `<button onclick="poke_stat('${pokem}')" class="pokelistitem">${pokem}</button><br>`;
     }
   poke_list.innerHTML += `<button class="pokelistshow" onclick='hide_list()'>Back</button>`
 }
