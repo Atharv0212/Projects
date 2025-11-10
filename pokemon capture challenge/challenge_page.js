@@ -100,7 +100,7 @@ function fetchPokemon() {
             Pokecoins.textContent = coins;
             resultDiv.innerHTML = resultText;
             
-            setTimeout(newPokeChallenge, 3000);
+            setTimeout(newPokeChallenge, 2000);
             
         })
         .catch(error => {
