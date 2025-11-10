@@ -59,6 +59,7 @@ h3{
     width: 40%;
     background-color: cyan;
     border-color: aqua;
+    margin-bottom: 10px;
 }
 .Pokestat{
     background-color: white;
@@ -67,4 +68,32 @@ h3{
     width: 80%;
     margin-top: 10px;
     margin-bottom: 10px;
+}
+.Pokelist{
+    margin-top: 50px;
+}
+.pokelistshow{
+    border-radius: 5px;
+    margin-top: 10px;
+    width: 40%;
+    background-color: cyan;
+    border-color: aqua;
+}
+.pokelistitem{
+    border-radius: 5px;
+    margin-top: 60px;
+    padding: 5px;
+    padding-left: 70px;
+    padding-right: 70px;
+    background-color: rgb(195, 193, 193);
+    margin-bottom: 20px;
+}
+.backbtn{
+    border-radius: 5px;
+    margin-top: 10px;
+    width: 40%;
+    background-color: antiquewhite;
+    border-color: antiquewhite;
+    margin-bottom: 10px;
+    margin-left: 10px;
 }

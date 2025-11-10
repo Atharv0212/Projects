@@ -9,7 +9,7 @@
 <body>
     <div class="body">
     <div class="main">
-        <h1>Pokémon Challenge</h1><br>
+        <h1>Pokémon Challenge</h1>
         <h3>Gotta know 'em all!</h3><br><hr style="border: none;background-color: rgb(217, 214, 214); width: 70%; height: 2px;">
         <div class="balance">Balance: <b><span style="color: green; size: 50px;" id="coins">1000</span></b> P </div>
         <div class="capture">
@@ -24,13 +24,14 @@
         <div>
             <input class="input" type="text" id="pokemon-input" placeholder="Enter Pokémon name" /><br>
             <button class="checkpowerbtn" onclick="fetchPokemon()">Check Power</button>
+            <button class="backbtn" onclick="home_page()">Back to Home</button>
             <div id="result"></div>
         </div>
     </div>
     <div class="main">
         <h1>Pokémon Card</h1>
         <div id="Challenge_Pokemon_card"></div>
-        <div id="poke_list"><button onclick="showpokelist()">Show captured pokemon</button></div>
+        <div class="Pokelist" id="poke_list"><button class="pokelistshow" onclick="showpokelist()">Show captured pokemon</button></div>
     </div>
     </div>
     <script src="challenge_page.js"></script>

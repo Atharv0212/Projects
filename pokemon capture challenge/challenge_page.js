@@ -5,6 +5,7 @@ const stat_number = document.getElementById('sts');
 const resultDiv = document.getElementById('result');
 const pokemonInput = document.getElementById('pokemon-input');
 const poke_list = document.getElementById('poke_list')
+const show_poke_stat = document.getElementById('show_poke_stat')
 
 let pokelist = [];
 const stat_names = ["HP", "Attack", "Defense", "Special-Attack", "Special-Defense", "Speed"];
@@ -106,18 +107,47 @@ function fetchPokemon() {
             resultDiv.innerHTML = `<span style="color:red;">${error.message}</span>`;
         });
 }
+function home_page() {
+        window.location.href = 'home_page.html';
+}
+function poke_stat(singlepokestat){
+  
+  poke_list.innerHTML = ``
+  const url = `https://pokeapi.co/api/v2/pokemon/${singlepokestat}`;
 
+  fetch(url)
+        .then(response => {
+            if (!response.ok) throw new Error('Challenge Pokémon not found');
+            return response.json();
+        })
+        .then(data => {
+            
+            poke_list.innerHTML = `
+            <h2>${data.name}</h2>
+            <img src="${data.sprites.front_default}" alt="${data.name}"><br>
+           `;
+           data.stats.forEach(stat => {
+                poke_list.innerHTML += `${stat.stat.name}: ${stat.base_stat}<br>`;
+            });
+            poke_list.innerHTML += `<br><button onclick="showpokelist()">Back to List</button>`;
+        })
+        .catch(error => {
+            resultDiv.innerHTML = `<span style="color:red;">${error.message}</span>`;
+        });
+      
+
+}
 function showpokelist(){
   poke_list.innerHTML = ``
   for (const pokem of pokelist){
       
-      poke_list.innerHTML += `<span style="color:red;">${pokem}</span><br>`;
+      poke_list.innerHTML += `<button onclick="poke_stat('${pokem}')" class="pokelistitem">${pokem}</button><br><br>`;
     }
-  poke_list.innerHTML += `<button onclick='hide_list()'>Back</button>`
+  poke_list.innerHTML += `<button class="pokelistshow" onclick='hide_list()'>Back</button>`
 }
 
 function hide_list(){
-  poke_list.innerHTML = `<button onclick='showpokelist()'>Show captured Pokemon</button>`
+  poke_list.innerHTML = `<button class="pokelistshow" onclick='showpokelist()'>Show captured Pokemon</button>`
 }
 
 newPokeChallenge();

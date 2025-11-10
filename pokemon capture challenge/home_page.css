@@ -1,11 +1,33 @@
 .main{
-    background-color: gray;
-    margin-top: 10%;
+    
+    background-color: white;
+    
     width: 40%;
-    margin-left: 28%;
+    margin-left: 80px;
     border-radius: 20px;
     text-align: center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); 
 }
+
 h1{
     align-self: center;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+h3{
+    color: gray;
+    padding-bottom: 0px;
+    margin-bottom: 50px;
+    padding-top: 0px;
+    margin-top: 0px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.checkpowerbtn{
+    border-radius: 5px;
+    margin-top: 10px;
+    width: 40%;
+    background-color: cyan;
+    border-color: aqua;
+    margin-bottom: 10px;
 }
