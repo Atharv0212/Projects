@@ -31,7 +31,7 @@ h3{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 .balance{
-    margin-top: 30px;
+    margin-top: 20px;
     background-color: beige;
     border-radius: 15px;
     margin-left: 40px;
@@ -78,6 +78,14 @@ h3{
     width: 40%;
     background-color: cyan;
     border-color: aqua;
+}
+.releaseall{
+    margin-left: 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+    width: 40%;
+    background-color: antiquewhite;
+    border-color: antiquewhite;
 }
 .pokelistitem{
     border-radius: 5px;

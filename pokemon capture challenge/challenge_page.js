@@ -15,6 +15,32 @@ let challengePokemon;
 let Stat_challenge;
 Pokecoins.textContent = coins;
 
+function add_ToPokedex(name_poke) {
+    pokelist.push(name_poke);
+    localStorage.setItem('pokedex', JSON.stringify(pokelist));
+}
+function releasepokemon(name) {
+  let i= pokelist.findIndex(poke => poke.name === name);
+  pokelist.splice(i, 1);
+  localStorage.setItem('pokedex', JSON.stringify(pokelist));
+  
+}
+
+function loadPokedex() {
+  const savedPokedex = localStorage.getItem('pokedex');
+  
+  if (savedPokedex) {
+    
+    pokelist = JSON.parse(savedPokedex);
+  }
+
+}
+loadPokedex();
+function clear_pokedex(){
+    pokelist = [];
+    localStorage.removeItem('pokedex');
+    
+}
 function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -53,6 +79,9 @@ function fetchPokemon() {
         resultDiv.innerHTML = `<span style="color:red;">Please enter a Pokémon name.</span>`;
         return;
     }
+    if (name == 'S'){
+        newPokeChallenge();
+    }
 
     if (!challengePokemon) {
         resultDiv.innerHTML = `<span style="color:red;">Looking for Pokemon.</span>`;
@@ -83,7 +112,7 @@ function fetchPokemon() {
                    resultText += `<span style="color:yellow;">You win!, but used an uncaptured Pokemon, deducted 20 pokecoins.</span>`;
                    coins -= 20;
                 }
-                pokelist.push(challengePokemon.name)
+                add_ToPokedex(challengePokemon.name)
             } else if (userStat < challengeStat) {
                 resultText += `<span style="color:red;">You lose! 50 pokecoins deducted</span>`;
                 coins -= 50;
@@ -141,9 +170,10 @@ function showpokelist(){
   poke_list.innerHTML = ``
   for (const pokem of pokelist){
       
-      poke_list.innerHTML += `<button onclick="poke_stat('${pokem}')" class="pokelistitem">${pokem}</button><br>`;
+      poke_list.innerHTML += `<button onclick="poke_stat('${pokem}')" class="pokelistitem">${pokem}</button><button onclick="releasepokemon('${pokem}')">Release</button><br>`;
     }
   poke_list.innerHTML += `<button class="pokelistshow" onclick='hide_list()'>Back</button>`
+  poke_list.innerHTML += `<button class="releaseall" onclick='clear_pokedex()'>Release ALL</button>`
 }
 
 function hide_list(){
